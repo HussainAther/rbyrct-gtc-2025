@@ -1,0 +1,7 @@
+cupy-cuda12x
+scikit-image
+streamlit
+numpy
+matplotlib
+pytest
+

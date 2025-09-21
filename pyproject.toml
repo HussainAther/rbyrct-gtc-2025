@@ -1,0 +1,18 @@
+[project]
+name = "rbyrct-core"
+version = "0.1.0"
+description = "CUDA-accelerated RBYRCT CT reconstruction (MART) with CuPy + Streamlit demo"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "cupy-cuda12x",
+  "scikit-image",
+  "streamlit",
+  "numpy",
+  "matplotlib",
+  "pytest"
+]
+
+[tool.ruff]
+line-length = 100
+

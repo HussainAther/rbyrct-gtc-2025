@@ -1,0 +1,13 @@
+name: rbyrct
+channels: [conda-forge, nvidia]
+dependencies:
+  - python=3.11
+  - cupy
+  - scikit-image
+  - streamlit
+  - numpy
+  - matplotlib
+  - pip
+  - pip:
+      - pytest
+
