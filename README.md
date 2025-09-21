@@ -1,1 +1,164 @@
-# rbyrct-gtc-2025
+# CUDA-Accelerated RBYRCT (MART) for Low-Dose CT
+
+**Open-source GPU reconstruction** using MART with custom CuPy RawKernels.  
+Built for the **NVIDIA GTC 2025 Golden Ticket Contest**.  
+Includes a live demo (Streamlit) + notebooks + benchmarks.
+
+> ⚡ **XX× faster** than CPU FBP on 512×512,  
+> 📈 **Better PSNR/SSIM** than FBP at **YY% fewer projections**,  
+> 🧩 **Interactive demo**: adjust projections/iterations in real-time.
+
+---
+
+## ✨ Why this project?
+
+- **GPU made it possible**: MART is slow on CPU; GPUs deliver real-time interactivity.  
+- **Dose reduction story**: High-quality reconstructions at fewer projections = lower radiation exposure.  
+- **Distinctive**: Medical imaging + MART/RBYRCT is rare in contest entries (most will be LLM demos).  
+
+---
+
+## 📦 Installation
+
+### Prerequisites
+- NVIDIA GPU + CUDA 12.x
+- Python 3.10–3.11
+
+### Option 1: pip
+```bash
+git clone https://github.com/<your-handle>/rbyrct-gtc-2025.git
+cd rbyrct-gtc-2025
+pip install -r requirements.txt
+````
+
+### Option 2: Conda
+
+```bash
+conda env create -f environment.yml
+conda activate rbyrct
+```
+
+### Option 3: Docker (NGC-ready)
+
+```bash
+docker build -t rbyrct-demo .
+docker run --gpus all -p 8501:8501 rbyrct-demo
+```
+
+---
+
+## 🚀 Quickstart
+
+Launch the demo:
+
+```bash
+streamlit run demo/app.py
+```
+
+Run a benchmark:
+
+```bash
+python examples/bench.py
+```
+
+---
+
+## 📊 Results
+
+Benchmarked on **GPU\_NAME** vs **CPU\_NAME** (fill in your hardware here):
+
+| Setting                    | CPU FBP (ms) | GPU MART (ms) | Speedup |
+| -------------------------- | -----------: | ------------: | ------: |
+| 512×512, 180 proj, det=512 |          AAA |           BBB |    CCC× |
+
+**Quality comparison (PSNR/SSIM):**
+
+* 180 → 120 projections:
+
+  * FBP = XX dB, SSIM = 0.YYY
+  * MART = ZZ dB, SSIM = 0.WWW
+
+---
+
+## 🖼️ Screenshots
+
+| Nsight Systems (timeline)                      | Side-by-side recon                       |
+| ---------------------------------------------- | ---------------------------------------- |
+| ![Nsight timeline](assets/nsight_timeline.png) | ![Side by side](assets/side_by_side.png) |
+
+---
+
+## 🧰 Tech stack
+
+* **CUDA** via CuPy RawKernels
+* **Nsight Systems/Compute** profiling
+* **Streamlit** interactive demo
+* **scikit-image** FBP baseline
+* **Docker** for reproducibility (NGC-ready)
+
+---
+
+## 📂 Repo layout
+
+```
+rbyrct-gtc-2025/
+├─ rbyrct_core/        # CuPy kernels + MART loop
+├─ demo/               # Streamlit UI
+├─ examples/           # Benchmarks + notebooks
+├─ assets/             # Screenshots for README/social
+├─ tests/              # Simple smoke tests
+└─ README.md
+```
+
+---
+
+## ⚡ API usage
+
+```python
+import cupy as cp
+from rbyrct_core.core import forward_project, mart_reconstruct
+from rbyrct_core.fbp_baseline import cpu_fbp_baseline
+
+# phantom (N x N)
+x = cp.ones((512, 512), dtype=cp.float32)
+
+# forward projection
+sino = forward_project(x, n_angles=180, n_det=512)
+
+# MART reconstruction
+rec = mart_reconstruct(sino, H=512, W=512, iters=10, beta=1.0)
+
+# CPU baseline
+rec_fbp = cpu_fbp_baseline(sino)
+```
+
+---
+
+## 📝 Citation
+
+If you use this code, please cite:
+
+```
+CUDA-Accelerated RBYRCT (MART) for Low-Dose CT
+NVIDIA GTC 2025 Golden Ticket Contest
+https://github.com/<your-handle>/rbyrct-gtc-2025
+```
+
+See `CITATION.cff` for metadata.
+
+---
+
+## 📣 Social post (what I’ll share)
+
+> Open-sourced a **CUDA-accelerated RBYRCT** pipeline for low-dose CT.
+> MART + custom kernels give **XX× speedup** over CPU and better PSNR/SSIM than FBP at **YY% fewer projections**.
+> Notebook + demo inside. Built on CUDA/cuFFT + profiled with Nsight.
+> \#NVIDIAGTC @NVIDIAGTC @NVIDIADeveloper
+
+---
+
+## ⚠️ Disclaimer
+
+This code is for **educational/demo purposes only**.
+It is *not* a clinical CT reconstruction tool.
+
