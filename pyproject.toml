@@ -15,4 +15,5 @@ dependencies = [
 
 [tool.ruff]
 line-length = 100
+target-version = "py311"
 
