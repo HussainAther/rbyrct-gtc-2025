@@ -1,3 +1,21 @@
+Metadata-Version: 2.4
+Name: rbyrct-core
+Version: 0.1.0
+Summary: CUDA-accelerated RBYRCT (MART) with CPU fallback and Streamlit demo
+Author: Syed Hussain Ather
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scikit-image
+Requires-Dist: streamlit
+Requires-Dist: matplotlib
+Requires-Dist: pillow
+Requires-Dist: pandas
+Requires-Dist: pytest
+Provides-Extra: gpu
+Requires-Dist: cupy-cuda12x>=12.0; extra == "gpu"
+
 # CUDA-Accelerated RBYRCT (MART) for Low-Dose CT
 
 **Open-source GPU reconstruction** using MART with custom CuPy RawKernels.  

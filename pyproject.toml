@@ -1,19 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "rbyrct-core"
 version = "0.1.0"
-description = "CUDA-accelerated RBYRCT CT reconstruction (MART) with CuPy + Streamlit demo"
+description = "CUDA-accelerated RBYRCT (MART) with CPU fallback and Streamlit demo"
 readme = "README.md"
 requires-python = ">=3.10"
+authors = [{ name = "Syed Hussain Ather" }]
+license = { text = "MIT" }
+
+# Base deps: portable on macOS; no CuPy here
 dependencies = [
-  "cupy-cuda12x",
+  "numpy",
   "scikit-image",
   "streamlit",
-  "numpy",
   "matplotlib",
+  "pillow",
+  "pandas",
   "pytest"
 ]
 
-[tool.ruff]
-line-length = 100
-target-version = "py311"
+[project.optional-dependencies]
+# GPU extras (only install on Linux when you want CUDA)
+gpu = [
+    "cupy-cuda12x>=12.0"
+]
+
+[tool.setuptools.packages.find]
+include = ["rbyrct_core*"]
 

@@ -1,0 +1,10 @@
+numpy
+scikit-image
+streamlit
+matplotlib
+pillow
+pandas
+pytest
+
+[gpu]
+cupy-cuda12x>=12.0
