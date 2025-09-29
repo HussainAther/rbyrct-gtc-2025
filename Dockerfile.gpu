@@ -1,0 +1,41 @@
+# CUDA 12 runtime + Ubuntu 22.04
+FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+
+# System deps
+RUN apt-get update && apt-get install -y \
+    python3.11 python3.11-venv python3-pip git \
+    && rm -rf /var/lib/apt/lists/*
+
+# App dir
+WORKDIR /app
+
+# Copy only dependency lists first (better layer caching)
+COPY requirements.txt pyproject.toml ./
+
+# Create venv (keeps image tidy)
+RUN python3.11 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Base deps (CPU-safe)
+RUN python -m pip install --upgrade pip \
+ && python -m pip install -r requirements.txt
+
+# GPU extra (CuPy for CUDA 12)
+RUN python -m pip install cupy-cuda12x
+
+# Copy the rest of the repo
+COPY . .
+
+# Install package (no deps, already installed)
+RUN python -m pip install --no-deps -e .
+
+# Streamlit settings for containers
+ENV STREAMLIT_SERVER_HEADLESS=true \
+    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
+    STREAMLIT_SERVER_ENABLE_CORS=false \
+    STREAMLIT_SERVER_PORT=8501 \
+    STREAMLIT_SERVER_ADDRESS=0.0.0.0
+
+EXPOSE 8501
+CMD ["streamlit", "run", "demo/app.py"]
+
