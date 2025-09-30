@@ -1,6 +1,29 @@
 # RBYRCT-GTC-2025
+# 🩻 RBYRCT: Reconstructing CT Smarter, Faster, Safer
 
-Patent-pending **RBYRCT reconstruction technology** for next-gen CT — designed to accelerate the fight against breast cancer with GPU-optimized iterative reconstruction.
+Patent-pending (Ray-by-Ray Computed Tomography) **RBYRCT reconstruction technology** for next-gen CT — designed to accelerate the fight against breast cancer with GPU-optimized iterative reconstruction.
+
+Breast cancer screening saves lives, but today’s CT scans require **high radiation doses** to get clear images. That dose can be risky, especially for younger patients. Our technology, **RBYRCT**, is designed to **cut radiation dose without losing detail** - potentially transforming how cancers are caught early.
+
+## What we built
+
+This project combines two worlds:
+
+* **MART (Multiplicative Algebraic Reconstruction Technique)** — an advanced algorithm that can reconstruct good images even from sparse or noisy CT data.
+* **GPU Acceleration with NVIDIA CUDA** — MART is powerful but slow on CPUs. With NVIDIA GPUs, it becomes *10–100× faster*, making it practical in real-time.
+
+## The core idea
+
+Think of CT like taking **many X-ray “shadows”** of an object from different angles, then piecing them together.
+
+* The **old way (FBP, Filtered Back Projection)** is fast but needs a *lot* of X-rays (higher dose).
+* Our way (**RBYRCT MART on GPUs**) can do the same job (or better) with fewer X-rays (lower dose) — meaning *less radiation for patients*.
+
+## Results at a glance
+
+* ⚡ **Speed**: GPU MART runs in milliseconds vs. seconds for CPU.
+* 🩻 **Image quality**: Cleaner reconstructions in sparse-angle, noisy settings.
+* 🌍 **Impact**: Aiming for **earlier, safer breast cancer detection worldwide**.
 
 ---
 
