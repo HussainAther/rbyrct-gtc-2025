@@ -1,8 +1,6 @@
 # RBYRCT-GTC-2025
 # 🩻 RBYRCT: Reconstructing CT Smarter, Faster, Safer
 
-![](linkedinreferncergordonalicea.png)
-
 ## The Vision: Safer, Earlier Breast Cancer Detection
 Breast cancer screening saves lives, but current CT scans often demand high radiation doses for clear images, posing a risk, especially to younger patients. Additionally, traditional imaging methods are frequently uncomfortable, invasive, and involve painful compression.
 
@@ -159,6 +157,8 @@ If this work helps you, please cite:
 ## License
 
 MIT License.
+
+![](linkedinreferncergordonalicea.png)
 
 ---
 
