@@ -98,6 +98,12 @@ If this work helps you, please cite:
 }
 ```
 
+### Troubleshooting
+- **No GPU?** Runs CPU-only automatically. Set `RBYRCT_FORCE_CPU=1` to force CPU.
+- **Colab GPU mismatch (cudaErrorInsufficientDriver)?** 
+  `pip uninstall -y cupy* && pip install cupy-cuda12x` (or `11x` if `nvidia-smi` shows 11.x), then Runtime → Restart.
+- **Import error?** We set `PYTHONPATH` in the notebook; no editable install needed.
+
 ---
 
 ## License
